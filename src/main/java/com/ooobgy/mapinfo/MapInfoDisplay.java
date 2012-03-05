@@ -1,9 +1,12 @@
 package com.ooobgy.mapinfo;
 
+import java.util.Iterator;
+
 import prefuse.Display;
 import prefuse.data.Table;
 import prefuse.data.io.CSVTableReader;
 import prefuse.data.io.DataIOException;
+import prefuse.data.util.TableIterator;
 
 /**
  * The main display (view) of the map demo.</br>
@@ -13,6 +16,7 @@ import prefuse.data.io.DataIOException;
  */
 public class MapInfoDisplay extends Display{
     private Table data;
+    
 
     /**
      * Random Serial Version UID
@@ -21,6 +25,10 @@ public class MapInfoDisplay extends Display{
 
     public void init(String mapDataFile) throws DataIOException {
         this.data = (new CSVTableReader()).readTable(mapDataFile);
+        
+        for( TableIterator iterator = this.data.iterator(); iterator.hasNext(); iterator.nextInt()){
+            
+        }
         // TODO Auto-generated method stub
     }
 

@@ -20,7 +20,7 @@ public class MapInfoDemo {
 
     public static void main(String[] args) {
         // Create a frame
-        JFrame frame = new JFrame("China Map Info Demo    Powered by Prefuse");
+        JFrame frame = new JFrame("");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Create the map dispaly
         MapInfoDisplay display = new MapInfoDisplay();
