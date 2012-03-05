@@ -1,6 +1,9 @@
 package com.ooobgy.mapinfo;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import prefuse.data.io.DataIOException;
 
 /**
  * A demo to display the map of China. Powered by prefuse. <br>
@@ -22,7 +25,14 @@ public class MapInfoDemo {
         // Create the map dispaly
         MapInfoDisplay display = new MapInfoDisplay();
         // init the display with the data file
-        display.init(MAP_DATA_FILE);
+        try {
+            display.init(MAP_DATA_FILE);
+        } catch (DataIOException e) { // if the display can't be inited. exit.
+            JOptionPane.showMessageDialog(frame, "Can't open the file: " + MAP_DATA_FILE, "Init Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            frame.dispose();
+            System.exit(1);
+        }
         frame.getContentPane().add(display);
         frame.pack();
         frame.setVisible(true);
