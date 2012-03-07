@@ -16,9 +16,14 @@ import com.ooobgy.mapinfo.exception.IllConfException;
  * @author 周晓龙 frogcherry@gmail.com
  */
 public class Config {
-    private static final Properties properties = new Properties();
+    private static boolean isConfiged = false;
+    private static Properties properties;
 
     private static void loadConf() {
+        if (isConfiged) {
+            return;
+        }
+        properties = new Properties();
         try {
             properties.load(new FileInputStream(new File(ConfConsts.CONF_FILE)));
         } catch (FileNotFoundException e) {
@@ -30,6 +35,11 @@ public class Config {
         }
     }
 
+    public static String get(String Field){
+        loadConf();
+        return PropertiesUtility.getStringProperty(properties, Field, true, IllConfException.class);
+    }
+    
     /**
      * 屏蔽构造
      */
