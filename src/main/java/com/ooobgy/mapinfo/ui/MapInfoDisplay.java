@@ -62,91 +62,29 @@ public class MapInfoDisplay extends Display {
     }
 
     private class MapInfoControl extends ControlAdapter {
-        private Point prePt = new Point();
+        private Point prePt;
 
         @Override
         public void mousePressed(MouseEvent e) {
-            refreshPrePt(e);
-//            System.out.println(e.getX());
-        }
-
-        private void refreshPrePt(MouseEvent e) {
-            prePt.x = e.getX();
-            prePt.y = e.getY();
+            prePt = (Point) e.getPoint().clone();
+            SwingUtilities.convertPointToScreen(prePt, e.getComponent());
         }
 
         @Override
-        public synchronized void mouseDragged(MouseEvent e) {
+        public void mouseDragged(MouseEvent e) {
             
             if (SwingUtilities.isLeftMouseButton(e)) {
                 Component c = e.getComponent();
-                int dx = e.getX() - prePt.x;
-                int dy = e.getY() - prePt.x;
-                System.out.println(dx);
+                Point pt = (Point) e.getPoint().clone();
+                SwingUtilities.convertPointToScreen(pt, c);
+                int dx = pt.x - prePt.x;
+                int dy = pt.y - prePt.y;
+//                System.out.println(dx);
                 // System.out.println(dx + "#" + dy);
                 // Point dispLoc = MapInfoDisplay.this.getLocat ion();
                 c.setLocation(dx, dy);
-                c.repaint();
+//                c.repaint();
             }
-        }
-
-    }
-
-    private class DisplayMouseListenner implements MouseInputListener {
-        private Point prePt = new Point();
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-            refreshPrePt(e);
-//            System.out.println(e.getX());
-        }
-
-        private void refreshPrePt(MouseEvent e) {
-            prePt.x = e.getX();
-            prePt.y = e.getY();
-        }
-
-        @Override
-        public synchronized void mouseDragged(MouseEvent e) {
-            System.out.println(e.getX());
-            if (SwingUtilities.isLeftMouseButton(e) &&(e.getX() >= prePt.x)) {
-                int dx = e.getX() - prePt.x;
-                int dy = e.getY() - prePt.x;
-                // System.out.println(dx + "#" + dy);
-                refreshPrePt(e);
-                 Point dispLoc = MapInfoDisplay.this.getLocation();
-                MapInfoDisplay.this.setLocation(dispLoc.x + dx, dispLoc.y + dy);
-            }
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            // TODO Auto-generated method stub
-            
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            // TODO Auto-generated method stub
-            
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            // TODO Auto-generated method stub
-            
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-            // TODO Auto-generated method stub
-            
-        }
-
-        @Override
-        public void mouseMoved(MouseEvent e) {
-            // TODO Auto-generated method stub
-            
         }
 
     }
