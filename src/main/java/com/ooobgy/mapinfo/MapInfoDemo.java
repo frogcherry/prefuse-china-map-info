@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 
 import com.ooobgy.mapinfo.conf.Config;
 import com.ooobgy.mapinfo.consts.ConfConsts;
+import com.ooobgy.mapinfo.ui.MapInfoDisplay;
 
 import prefuse.data.io.DataIOException;
 
