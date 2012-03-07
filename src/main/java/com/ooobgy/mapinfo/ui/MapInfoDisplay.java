@@ -44,13 +44,11 @@ public class MapInfoDisplay extends Display{
             //System.out.println(iterator.get("error"));
         }
         // TODO Auto-generated method stub
-        //setSize(Config.getInt(ConfConsts.FRAME_WIDTH), Config.getInt(ConfConsts.FRAME_HEIGHT));
-        BackgroundDisplay bk = new BackgroundDisplay();
-        this.add(bk);
-        bk.paint(Config.get(ConfConsts.BK_IMG_FILE), Config.getInt(ConfConsts.FRAME_WIDTH), Config.getInt(ConfConsts.FRAME_HEIGHT));
-        
+        this.setSize(Config.getInt(ConfConsts.FRAME_WIDTH), Config.getInt(ConfConsts.FRAME_HEIGHT));
+
         bindEventListener();
         this.addMouseListener(new DisplayMouseListenner());
+        
     }
     
     private void bindEventListener() {

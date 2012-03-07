@@ -1,5 +1,7 @@
 package com.ooobgy.mapinfo;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -36,6 +38,9 @@ public class MapInfoDemo {
             System.exit(1);
         }
         frame.getContentPane().add(display);
+        frame.getContentPane().setLayout(null);
+        frame.setMinimumSize(new Dimension(Config.getInt(ConfConsts.FRAME_WIDTH), Config.getInt(ConfConsts.FRAME_HEIGHT)));
+        frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
     }
