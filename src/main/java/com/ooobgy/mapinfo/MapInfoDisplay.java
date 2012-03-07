@@ -1,5 +1,7 @@
 package com.ooobgy.mapinfo;
 
+import javax.swing.ActionMap;
+
 import com.ooobgy.mapinfo.conf.Config;
 import com.ooobgy.mapinfo.consts.ConfConsts;
 
@@ -32,7 +34,7 @@ public class MapInfoDisplay extends Display{
     public void init(String mapDataFile) throws DataIOException {
         this.data = (new CSVTableReader()).readTable(mapDataFile);
         
-        this.setBackgroundImage(Config.get(ConfConsts.BK_IMG_FILE), false, false);
+        setBackgroundImage(Config.get(ConfConsts.BK_IMG_FILE), false, false);
         
         for( TableIterator iterator = this.data.iterator(); iterator.hasNext();){
             //System.out.println(Config.get(ConfConsts.DATA_NAME));
@@ -42,6 +44,7 @@ public class MapInfoDisplay extends Display{
         }
         // TODO Auto-generated method stub
         setSize(Config.getInt(ConfConsts.FRAME_WIDTH), Config.getInt(ConfConsts.FRAME_HEIGHT));
+        
     }
 
 }
