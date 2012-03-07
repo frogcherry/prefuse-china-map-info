@@ -3,6 +3,9 @@ package com.ooobgy.mapinfo;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.ooobgy.mapinfo.conf.Config;
+import com.ooobgy.mapinfo.consts.ConfConsts;
+
 import prefuse.data.io.DataIOException;
 
 /**
@@ -15,20 +18,18 @@ import prefuse.data.io.DataIOException;
  * @see MapInfoDisplay
  */
 public class MapInfoDemo {
-    
-    private static final String MAP_DATA_FILE = "data/china_map_data.csv";
-
     public static void main(String[] args) {
         // Create a frame
         JFrame frame = new JFrame("");
+        frame.setTitle(Config.get(ConfConsts.TITLE));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Create the map dispaly
         MapInfoDisplay display = new MapInfoDisplay();
         // init the display with the data file
         try {
-            display.init(MAP_DATA_FILE);
+            display.init(Config.get(ConfConsts.DATAFILE));
         } catch (DataIOException e) { // if the display can't be inited. exit.
-            JOptionPane.showMessageDialog(frame, "Can't open the file: " + MAP_DATA_FILE, "Init Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(frame, "Can't open the file: " + Config.get(ConfConsts.DATAFILE), "Init Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             frame.dispose();
             System.exit(1);

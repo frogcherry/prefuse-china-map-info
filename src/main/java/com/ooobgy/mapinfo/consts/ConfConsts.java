@@ -3,6 +3,14 @@ package com.ooobgy.mapinfo.consts;
 public class ConfConsts {
     public static final String CONF_FILE = "conf/prefuse-map-info.properties";
 
+    public static final String DATAFILE = "mapinfo.datafile";
+    public static final String BK_IMG_FILE = "mapinfo.bkimgfile";
+    
+    public static final String FRAME_WIDTH = "mapinfo.frame.size.width";
+    public static final String FRAME_HEIGHT = "mapinfo.frame.size.height";
+    
+    public static final String TITLE = "mapinfo.frame.title";
+    
     public static final String DATA_ID = "mapinfo.data.id";
     public static final String DATA_NAME = "mapinfo.data.name";
     public static final String DATA_AREA = "mapinfo.data.area";

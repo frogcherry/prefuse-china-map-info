@@ -40,6 +40,11 @@ public class Config {
         return PropertiesUtility.getStringProperty(properties, Field, true, IllConfException.class);
     }
     
+    public static int getInt(String Field){
+        loadConf();
+        return PropertiesUtility.getIntegerProperty(properties, Field, true, IllConfException.class);
+    }
+    
     /**
      * 屏蔽构造
      */
