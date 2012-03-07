@@ -2,6 +2,9 @@ package com.ooobgy.mapinfo;
 
 import java.util.Iterator;
 
+import com.ooobgy.mapinfo.conf.Config;
+import com.ooobgy.mapinfo.consts.ConfConsts;
+
 import prefuse.Display;
 import prefuse.data.Table;
 import prefuse.data.io.CSVTableReader;
@@ -26,8 +29,11 @@ public class MapInfoDisplay extends Display{
     public void init(String mapDataFile) throws DataIOException {
         this.data = (new CSVTableReader()).readTable(mapDataFile);
         
-        for( TableIterator iterator = this.data.iterator(); iterator.hasNext(); iterator.nextInt()){
-            
+        for( TableIterator iterator = this.data.iterator(); iterator.hasNext();){
+            //System.out.println(Config.get(ConfConsts.DATA_NAME));
+            iterator.nextInt();
+            System.out.println(iterator.get(Config.get(ConfConsts.DATA_NAME)));
+            //System.out.println(iterator.get("error"));
         }
         // TODO Auto-generated method stub
     }

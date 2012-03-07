@@ -1,5 +1,7 @@
 package com.ooobgy.mapinfo.pojo;
 
+import prefuse.data.util.TableIterator;
+
 /**
  * 储存每个省份基本信息的实体类
  * <b>created:</b> 2012-3-7
@@ -16,6 +18,14 @@ public class Province {
     private int maxX;
     private int maxY;
     private String pic;
+    
+    public Province buildProvince(TableIterator dataSource){
+        Province province = new Province();
+        
+        
+        
+        return province;
+    }
     
     public Integer getId() {
         return id;
