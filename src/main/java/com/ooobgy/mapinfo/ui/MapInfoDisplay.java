@@ -71,6 +71,6 @@ public class MapInfoDisplay extends Display {
 
     private void bindEventListener() throws AWTException {        
 //         addMouseListener(new DisplayMouseListenner());
-        this.addControlListener(new MapInfoControl());
+        this.addControlListener(new MapInfoControl(provincesMap));
     }
 }
