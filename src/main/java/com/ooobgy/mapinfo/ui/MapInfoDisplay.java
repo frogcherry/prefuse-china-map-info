@@ -63,11 +63,13 @@ public class MapInfoDisplay extends Display {
 
     private class MapInfoControl extends ControlAdapter {
         private Point prePt;
+        private Point originLoc;
 
         @Override
         public void mousePressed(MouseEvent e) {
-            prePt = (Point) e.getPoint().clone();
-            SwingUtilities.convertPointToScreen(prePt, e.getComponent());
+            prePt = (Point) e.getLocationOnScreen().clone();
+            originLoc = (Point) e.getComponent().getLocation().clone();
+            //SwingUtilities.convertPointToScreen(prePt, e.getComponent());
         }
 
         @Override
@@ -82,7 +84,7 @@ public class MapInfoDisplay extends Display {
 //                System.out.println(dx);
                 // System.out.println(dx + "#" + dy);
                 // Point dispLoc = MapInfoDisplay.this.getLocat ion();
-                c.setLocation(dx, dy);
+                c.setLocation(originLoc.x + dx, originLoc.y + dy);
 //                c.repaint();
             }
         }
