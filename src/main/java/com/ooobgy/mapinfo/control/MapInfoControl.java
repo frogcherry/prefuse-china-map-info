@@ -25,6 +25,7 @@ import com.ooobgy.mapinfo.consts.ConfConsts;
 import com.ooobgy.mapinfo.exception.IllDataException;
 import com.ooobgy.mapinfo.pojo.Province;
 import com.ooobgy.mapinfo.ui.ImagePanel;
+import com.ooobgy.mapinfo.ui.InfoBoard;
 
 /**
  * 操作控制器 <b>created:</b> 2012-3-8
@@ -39,14 +40,16 @@ public class MapInfoControl extends ControlAdapter {
     private Map<ColorType, Set<Province>> provincesMap;
     private int preTouchedProvId;
     private ImagePanel glassPan;
+    private InfoBoard infoBoard;
 
     public MapInfoControl(Map<ColorType, Set<Province>> provincesMap,
-            ImagePanel glassPan) throws AWTException {
+            ImagePanel glassPan, InfoBoard infoBoard) throws AWTException {
         super();
         this.robot = new Robot();
         this.provincesMap = provincesMap;
         this.glassPan = glassPan;
         this.preTouchedProvId = -1;
+        this.infoBoard = infoBoard;
     }
 
     @Override
@@ -72,6 +75,7 @@ public class MapInfoControl extends ControlAdapter {
                 preTouchedProvId = province.getId();
                 String imgFile = Config.get(ConfConsts.IMG_FOLDER)
                         + province.getImage();
+                infoBoard.showProvince(province);
                 try {
                     Image img = ImageIO.read(new File(imgFile));
                     glassPan.setImage(img);
@@ -87,7 +91,10 @@ public class MapInfoControl extends ControlAdapter {
             glassPan.setImage(null);
             glassPan.repaint();
             preTouchedProvId = -1;
+            infoBoard.showProvince(province);
         }
+        
+        
     }
 
     private Province matchProvince(ColorType normColor, Point touchPt) {

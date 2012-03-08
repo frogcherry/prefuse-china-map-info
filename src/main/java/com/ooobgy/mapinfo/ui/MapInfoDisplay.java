@@ -7,8 +7,6 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.swing.JPanel;
-
 import com.ooobgy.mapinfo.color.ColorType;
 import com.ooobgy.mapinfo.conf.Config;
 import com.ooobgy.mapinfo.consts.ConfConsts;
@@ -38,6 +36,7 @@ public class MapInfoDisplay extends Display {
     private Table data;
     private Map<ColorType, Set<Province>> provincesMap;
     private ImagePanel glassPan;
+    private InfoBoard infoBoard;
     
     /**
      * Random Serial Version UID
@@ -62,8 +61,12 @@ public class MapInfoDisplay extends Display {
         this.setLayout(null);
         glassPan.setMinimumSize(new Dimension(Config.getInt(ConfConsts.FRAME_WIDTH), Config.getInt(ConfConsts.FRAME_HEIGHT)));
         glassPan.setSize(Config.getInt(ConfConsts.FRAME_WIDTH), Config.getInt(ConfConsts.FRAME_HEIGHT));
+        infoBoard = new InfoBoard();
+        this.add(infoBoard);
+        infoBoard.setLocation(0, 470);
+        infoBoard.setVisible(false);
         //System.out.println(provincesMap);
-        System.out.println(glassPan.getSize());
+//        System.out.println(glassPan.getSize());
         bindEventListener();
     }
 
@@ -82,6 +85,6 @@ public class MapInfoDisplay extends Display {
 
     private void bindEventListener() throws AWTException {        
 //         addMouseListener(new DisplayMouseListenner());
-        this.addControlListener(new MapInfoControl(provincesMap, glassPan));
+        this.addControlListener(new MapInfoControl(provincesMap, glassPan, infoBoard));
     }
 }
