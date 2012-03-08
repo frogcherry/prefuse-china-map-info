@@ -77,8 +77,8 @@ public class MapInfoDisplay extends Display {
             
             if (SwingUtilities.isLeftMouseButton(e)) {
                 Component c = e.getComponent();
-                Point pt = (Point) e.getPoint().clone();
-                SwingUtilities.convertPointToScreen(pt, c);
+                Point pt = (Point) e.getLocationOnScreen().clone();
+//                SwingUtilities.convertPointToScreen(pt, c);
                 int dx = pt.x - prePt.x;
                 int dy = pt.y - prePt.y;
 //                System.out.println(dx);
