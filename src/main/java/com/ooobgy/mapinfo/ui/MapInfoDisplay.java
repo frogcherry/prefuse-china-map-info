@@ -5,10 +5,10 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 
 import javax.swing.SwingUtilities;
-import javax.swing.event.MouseInputListener;
-
 import com.ooobgy.mapinfo.conf.Config;
 import com.ooobgy.mapinfo.consts.ConfConsts;
+import com.ooobgy.mapinfo.control.Rebounder;
+import com.ooobgy.mapinfo.control.RebounderOld;
 
 import prefuse.Display;
 import prefuse.Visualization;
@@ -87,6 +87,14 @@ public class MapInfoDisplay extends Display {
                 c.setLocation(originLoc.x + dx, originLoc.y + dy);
 //                c.repaint();
             }
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+//            RebounderOld rebounder = new RebounderOld(e.getComponent(), new Point(0, 0));
+//            rebounder.run();
+            Rebounder rebounder = new Rebounder(e.getComponent(), new Point(0, 0));
+            rebounder.execute();
         }
 
     }
