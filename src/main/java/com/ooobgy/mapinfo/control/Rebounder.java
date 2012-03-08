@@ -6,16 +6,16 @@ import java.util.List;
 
 import javax.swing.SwingWorker;
 
+/**
+ * 光滑匀速的滑动
+ * <b>created:</b> 2012-3-8
+ * @author 周晓龙  frogcherry@gmail.com
+ */
 public class Rebounder extends SwingWorker<Point, Point> {
     private static final int ANIM_TIME = 200;// animation (ms)
     public static final int ANIM_FRM = 10;// 动画帧数
-    private volatile boolean isRunning = false;
     private Component actor;
     private Point destination;
-
-    public void shutdown() {
-        isRunning = false;
-    }
 
     public Rebounder(Component c, Point destination) {
         this.actor = c;

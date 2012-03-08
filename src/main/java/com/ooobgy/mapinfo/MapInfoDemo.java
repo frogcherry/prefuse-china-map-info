@@ -1,5 +1,6 @@
 package com.ooobgy.mapinfo;
 
+import java.awt.AWTException;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -33,6 +34,10 @@ public class MapInfoDemo {
             display.init(Config.get(ConfConsts.DATAFILE));
         } catch (DataIOException e) { // if the display can't be inited. exit.
             JOptionPane.showMessageDialog(frame, "Can't open the file: " + Config.get(ConfConsts.DATAFILE), "Init Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            frame.dispose();
+            System.exit(1);
+        } catch (AWTException e) {
             e.printStackTrace();
             frame.dispose();
             System.exit(1);

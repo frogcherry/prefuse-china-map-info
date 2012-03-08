@@ -1475,6 +1475,17 @@ public class ValidationUtility {
         }
     }
     
+    public static boolean isInRange(int value, int from, int to, boolean fromInclusive, boolean toInclusive){
+        boolean valid = (value < to) && (value > from);
+        valid = valid || (fromInclusive && (value == from)) || (toInclusive && (value == to));
+        
+        return valid;
+    }
+    
+    public static boolean isInRange(int value, int center, int range, boolean edgeInclusive){
+        return isInRange(value, center - range, center + range, edgeInclusive, edgeInclusive);
+    }
+    
     /**
      * 比较BigDecimal的大小，value是否比number大，不是的话抛出异常。inclusive标定等于是否可以
      * @param value

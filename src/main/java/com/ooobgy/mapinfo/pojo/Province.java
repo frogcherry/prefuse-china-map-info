@@ -1,5 +1,10 @@
 package com.ooobgy.mapinfo.pojo;
 
+import com.ooobgy.mapinfo.color.ColorType;
+import com.ooobgy.mapinfo.conf.Config;
+import com.ooobgy.mapinfo.consts.ConfConsts;
+import com.ooobgy.mapinfo.exception.IllDataException;
+
 import prefuse.data.util.TableIterator;
 
 /**
@@ -8,7 +13,7 @@ import prefuse.data.util.TableIterator;
  * @author 周晓龙  frogcherry@gmail.com
  */
 public class Province {
-    private Integer id;
+    private int id;
     private String name;
     private double area;
     private int population;
@@ -17,20 +22,54 @@ public class Province {
     private int minY;
     private int maxX;
     private int maxY;
-    private String pic;
+    private String image;
+    private ColorType color;
     
-    public Province buildProvince(TableIterator dataSource){
-        Province province = new Province();
-        
-        
-        
-        return province;
+
+    private static ColorType matchColor(int colorId){
+        switch (colorId) {
+            case 1: return ColorType.PINK;
+            case 2: return ColorType.BLUE;
+            case 3: return ColorType.YELLOW;
+            case 4: return ColorType.GREEN;
+            case 5: return ColorType.RED;
+            default: throw new IllDataException("error when read data: error color id.");
+        }
     }
     
-    public Integer getId() {
+    public static Province buildProvince(TableIterator dataSource){      
+        try {
+            Province province = new Province();      
+            province.setId(dataSource.getInt(Config.get(ConfConsts.DATA_ID)));
+            province.setName(dataSource.getString(Config.get(ConfConsts.DATA_NAME)));
+            province.setImage(dataSource.getString(Config.get(ConfConsts.DATA_IMAGE)));
+            province.setPopulation(dataSource.getInt(Config.get(ConfConsts.DATA_POPULATION)));
+            province.setMinX(dataSource.getInt(Config.get(ConfConsts.DATA_MINX)));
+            province.setMaxX(dataSource.getInt(Config.get(ConfConsts.DATA_MAXX)));
+            province.setMinY(dataSource.getInt(Config.get(ConfConsts.DATA_MINY)));
+            province.setMaxY(dataSource.getInt(Config.get(ConfConsts.DATA_MAXY)));
+            province.setArea(dataSource.getDouble(Config.get(ConfConsts.DATA_AREA)));
+            province.setPopulationRate(dataSource.getFloat(Config.get(ConfConsts.DATA_POPULATIONRATE)));
+            int colorId = dataSource.getInt(Config.get(ConfConsts.DATA_COLORID));
+            province.setColor(matchColor(colorId));
+            return province;
+        } catch (Exception e) {
+            throw new IllDataException("error when read data", e);
+        }
+    }
+    
+    public ColorType getColor() {
+        return color;
+    }
+
+    public void setColor(ColorType color) {
+        this.color = color;
+    }
+    
+    public int getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getName() {
@@ -81,10 +120,13 @@ public class Province {
     public void setMaxY(int maxY) {
         this.maxY = maxY;
     }
-    public String getPic() {
-        return pic;
+
+    public String getImage() {
+        return image;
     }
-    public void setPic(String pic) {
-        this.pic = pic;
+
+    public void setImage(String image) {
+        this.image = image;
     }
+    
 }
