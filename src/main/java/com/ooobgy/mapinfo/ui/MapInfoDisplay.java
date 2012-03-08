@@ -64,11 +64,15 @@ public class MapInfoDisplay extends Display {
     private class MapInfoControl extends ControlAdapter {
         private Point prePt;
         private Point originLoc;
+        private Rebounder rebounder;
 
         @Override
         public void mousePressed(MouseEvent e) {
             prePt = (Point) e.getLocationOnScreen().clone();
             originLoc = (Point) e.getComponent().getLocation().clone();
+            if (rebounder != null) {
+                rebounder.cancel(true);
+            }
             //SwingUtilities.convertPointToScreen(prePt, e.getComponent());
         }
 
@@ -93,7 +97,7 @@ public class MapInfoDisplay extends Display {
         public void mouseReleased(MouseEvent e) {
 //            RebounderOld rebounder = new RebounderOld(e.getComponent(), new Point(0, 0));
 //            rebounder.run();
-            Rebounder rebounder = new Rebounder(e.getComponent(), new Point(0, 0));
+            rebounder = new Rebounder(e.getComponent(), new Point(0, 0));
             rebounder.execute();
         }
 
