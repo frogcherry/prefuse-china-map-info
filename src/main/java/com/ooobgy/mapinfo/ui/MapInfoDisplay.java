@@ -8,8 +8,6 @@ import javax.swing.SwingUtilities;
 import com.ooobgy.mapinfo.conf.Config;
 import com.ooobgy.mapinfo.consts.ConfConsts;
 import com.ooobgy.mapinfo.control.Rebounder;
-import com.ooobgy.mapinfo.control.RebounderOld;
-
 import prefuse.Display;
 import prefuse.Visualization;
 import prefuse.controls.ControlAdapter;
@@ -42,10 +40,8 @@ public class MapInfoDisplay extends Display {
         setBackgroundImage(Config.get(ConfConsts.BK_IMG_FILE), false, false);
 
         for (TableIterator iterator = this.data.iterator(); iterator.hasNext();) {
-            // System.out.println(Config.get(ConfConsts.DATA_NAME));
             iterator.nextInt();
-//            System.out.println(iterator.get(Config.get(ConfConsts.DATA_NAME)));
-            // System.out.println(iterator.get("error"));
+            
         }
         // TODO Auto-generated method stub
         this.setSize(Config.getInt(ConfConsts.FRAME_WIDTH),
