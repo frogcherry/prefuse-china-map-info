@@ -21,6 +21,7 @@ public class ConfConsts {
     public static final String DATA_MAXX = "mapinfo.data.maxX";
     public static final String DATA_MAXY = "mapinfo.data.maxY";
     public static final String DATA_COLORID = "mapinfo.data.colorId";
-    public static final String DATA_IMAGE = "mapinfo.data.iamge";
+    public static final String DATA_IMAGE = "mapinfo.data.image";
 
+    public static final String IMG_FOLDER = "mapinfo.image.folder";
 }

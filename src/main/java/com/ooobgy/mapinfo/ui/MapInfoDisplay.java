@@ -1,10 +1,13 @@
 package com.ooobgy.mapinfo.ui;
 
 import java.awt.AWTException;
+import java.awt.Dimension;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+
+import javax.swing.JPanel;
 
 import com.ooobgy.mapinfo.color.ColorType;
 import com.ooobgy.mapinfo.conf.Config;
@@ -34,6 +37,7 @@ public class MapInfoDisplay extends Display {
 
     private Table data;
     private Map<ColorType, Set<Province>> provincesMap;
+    private ImagePanel glassPan;
     
     /**
      * Random Serial Version UID
@@ -52,8 +56,15 @@ public class MapInfoDisplay extends Display {
         this.setSize(Config.getInt(ConfConsts.FRAME_WIDTH),
                 Config.getInt(ConfConsts.FRAME_HEIGHT));
 
-        bindEventListener();
+        glassPan = new ImagePanel();
+        this.add(glassPan);
+        glassPan.setLocation(0, 0);
+        this.setLayout(null);
+        glassPan.setMinimumSize(new Dimension(Config.getInt(ConfConsts.FRAME_WIDTH), Config.getInt(ConfConsts.FRAME_HEIGHT)));
+        glassPan.setSize(Config.getInt(ConfConsts.FRAME_WIDTH), Config.getInt(ConfConsts.FRAME_HEIGHT));
         //System.out.println(provincesMap);
+        System.out.println(glassPan.getSize());
+        bindEventListener();
     }
 
     private void pushProvinceMap(Province province){
@@ -71,6 +82,6 @@ public class MapInfoDisplay extends Display {
 
     private void bindEventListener() throws AWTException {        
 //         addMouseListener(new DisplayMouseListenner());
-        this.addControlListener(new MapInfoControl(provincesMap));
+        this.addControlListener(new MapInfoControl(provincesMap, glassPan));
     }
 }

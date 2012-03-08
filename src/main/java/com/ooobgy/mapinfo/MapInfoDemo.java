@@ -48,5 +48,6 @@ public class MapInfoDemo {
         frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
+   
     }
 }

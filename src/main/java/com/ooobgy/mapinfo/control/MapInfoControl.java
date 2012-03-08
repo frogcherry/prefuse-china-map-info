@@ -3,12 +3,16 @@ package com.ooobgy.mapinfo.control;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
 
 import prefuse.controls.ControlAdapter;
@@ -16,13 +20,16 @@ import prefuse.controls.ControlAdapter;
 import com.ooobgy.comm.util.ValidationUtility;
 import com.ooobgy.mapinfo.color.ColorType;
 import com.ooobgy.mapinfo.color.ColorUtil;
+import com.ooobgy.mapinfo.conf.Config;
+import com.ooobgy.mapinfo.consts.ConfConsts;
 import com.ooobgy.mapinfo.exception.IllDataException;
 import com.ooobgy.mapinfo.pojo.Province;
+import com.ooobgy.mapinfo.ui.ImagePanel;
 
 /**
- * 操作控制器
- * <b>created:</b> 2012-3-8
- * @author 周晓龙  frogcherry@gmail.com
+ * 操作控制器 <b>created:</b> 2012-3-8
+ * 
+ * @author 周晓龙 frogcherry@gmail.com
  */
 public class MapInfoControl extends ControlAdapter {
     private Point prePt;
@@ -30,14 +37,18 @@ public class MapInfoControl extends ControlAdapter {
     private Rebounder rebounder;
     private Robot robot;
     private Map<ColorType, Set<Province>> provincesMap;
-    private Province preTouchedProv;
+    private int preTouchedProvId;
+    private ImagePanel glassPan;
 
-    public MapInfoControl(Map<ColorType, Set<Province>> provincesMap) throws AWTException {
+    public MapInfoControl(Map<ColorType, Set<Province>> provincesMap,
+            ImagePanel glassPan) throws AWTException {
         super();
-        robot = new Robot();
+        this.robot = new Robot();
         this.provincesMap = provincesMap;
+        this.glassPan = glassPan;
+        this.preTouchedProvId = -1;
     }
-    
+
     @Override
     public void mousePressed(MouseEvent e) {
         prePt = (Point) e.getLocationOnScreen().clone();
@@ -45,9 +56,9 @@ public class MapInfoControl extends ControlAdapter {
         if (rebounder != null) {
             rebounder.cancel(true);
         }
-        //SwingUtilities.convertPointToScreen(prePt, e.getComponent());
+        // SwingUtilities.convertPointToScreen(prePt, e.getComponent());
     }
-    
+
     @Override
     public void mouseMoved(MouseEvent e) {
         Point pt = (Point) e.getLocationOnScreen().clone();
@@ -55,52 +66,72 @@ public class MapInfoControl extends ControlAdapter {
         ColorType normColor = ColorUtil.matchColor(color);
         Point touchPt = (Point) e.getPoint().clone();
         Province province = matchProvince(normColor, touchPt);
-        if (province != null && preTouchedProv.getId() != province.getId()) {
-            System.out.println(province.getName());
-            //TODO: print the info.
+        if (province != null) {
+            if (preTouchedProvId != province.getId()) {
+                // System.out.println(province.getName());
+                preTouchedProvId = province.getId();
+                String imgFile = Config.get(ConfConsts.IMG_FOLDER)
+                        + province.getImage();
+                try {
+                    Image img = ImageIO.read(new File(imgFile));
+                    glassPan.setImage(img);
+                    glassPan.repaint();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                    throw new IllDataException("error data: \"" + imgFile
+                            + "\" does not exist. ", e1);
+                }
+                // TODO: print the info.
+            }
+        } else {
+            glassPan.setImage(null);
+            glassPan.repaint();
+            preTouchedProvId = -1;
         }
     }
 
     private Province matchProvince(ColorType normColor, Point touchPt) {
         Set<Province> provinces = provincesMap.get(normColor);
         if (provinces == null) {
-            throw new IllDataException("Illegal data or map image!");
+            return null;
         }
-        
+
         for (Province province : provinces) {
-            if (ValidationUtility.isInRange(touchPt.x, province.getMinX(), province.getMaxX(), true, true)
-                    && ValidationUtility.isInRange(touchPt.y, province.getMinY(), province.getMaxY(), true, true)) {
+            if (ValidationUtility.isInRange(touchPt.x, province.getMinX(),
+                    province.getMaxX(), true, true)
+                    && ValidationUtility.isInRange(touchPt.y,
+                            province.getMinY(), province.getMaxY(), true, true)) {
                 return province;
             }
         }
-        
+
         return null;
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        
+
         if (SwingUtilities.isLeftMouseButton(e)) {
             Component c = e.getComponent();
             Point pt = (Point) e.getLocationOnScreen().clone();
-//            SwingUtilities.convertPointToScreen(pt, c);
+            // SwingUtilities.convertPointToScreen(pt, c);
             int dx = pt.x - prePt.x;
             int dy = pt.y - prePt.y;
-//            System.out.println(dx);
+            // System.out.println(dx);
             // System.out.println(dx + "#" + dy);
             // Point dispLoc = MapInfoDisplay.this.getLocat ion();
             c.setLocation(originLoc.x + dx, originLoc.y + dy);
-//            c.repaint();
+            // c.repaint();
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-//        RebounderOld rebounder = new RebounderOld(e.getComponent(), new Point(0, 0));
-//        rebounder.run();
+        // RebounderOld rebounder = new RebounderOld(e.getComponent(), new
+        // Point(0, 0));
+        // rebounder.run();
         rebounder = new Rebounder(e.getComponent(), new Point(0, 0));
         rebounder.execute();
     }
 
 }
-
