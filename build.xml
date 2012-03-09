@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<project name="prefuse-china-map-info" basedir="." default="jar">
+    <description>
+        forgcherry's practise for studying prefuse and swing
+    </description>
+    <property name="project.name" value="prefuse-china-map-info" />
+    <property name="srcdir" value="src" />
+    <property name="src.java" value="src/main/java" />
+    <property name="src.test" value="src/test/java" />
+    <property name="lib.dir" value="lib" />
+    <property name="dist.dir" value="dist" />
+    <property name="build.dir" value="build" />
+    <property name="javadoc.dir" value="docs/javadocs" />
+    <property name="testlogdir" value="log" />
+    <property name="report.tests" value="${testlogdir}/junit_tests" />
+    <property name="report.tests.html" value="${report.tests}/html" />
+    <property name="instrumented.dir" value="${build.dir}/instrumented" />
+    <property name="log.coveragereport" value="${testlogdir}/coveragereport" />
+    <property name="cobertura.datafile" value="${testlogdir}/cobertura.ser" />
+    <property name="dist" value="dist" />
+    <property name="dist.jar" value="${dist}/jarons_utility.jar" />
+    <property name="encoding.code" value="UTF-8" />
+    <property name="encoding.javadoc" value="GBK" />
+
+    <path id="class.path">
+        <pathelement location="${build.dir}" />
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <taskdef resource="tasks.properties">
+        <classpath refid="class.path">
+        </classpath>
+    </taskdef>
+
+    <target name="compile" depends="init">
+        <javac srcdir="${src.java}" destdir="${build.dir}" source="1.6" target="1.6" nowarn="yes" debug="yes" includeantruntime="yes">
+            <classpath refid="class.path">
+            </classpath>
+            <compilerarg line="-encoding ${encoding.code}" />
+        </javac>
+    </target>
+
+    <target name="compile-test" depends="compile">
+        <javac srcdir="${src.test}" destdir="${build.dir}" source="1.6" target="1.6" nowarn="yes" debug="yes" includeantruntime="yes">
+            <classpath refid="class.path">
+            </classpath>
+            <compilerarg line="-encoding ${encoding.code}" />
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile" description="Creates Jar of ${project.name}">
+        <jar jarfile="${dist.jar}" compress="true" basedir="${build.dir}">
+        </jar>
+    </target>
+
+    <target name="init">
+        <tstamp />
+        <mkdir dir="${build.dir}" />
+        <mkdir dir="${dist.dir}" />
+        <mkdir dir="${testlogdir}" />
+        <mkdir dir="${javadoc.dir}" />
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}" />
+        <delete dir="${dist.dir}" />
+        <delete dir="${testlogdir}" />
+        <delete dir="${javadoc.dir}" />
+    </target>
+
+    <target name="javadoc" description="Generate the Javadoc HTML pages.">
+        <delete dir="${javadoc.dir}" />
+        <mkdir dir="${javadoc.dir}" />
+        <javadoc destdir="${javadoc.dir}" windowtitle="${project.name} Class Library" use="yes" linksource="yes" splitindex="yes" encoding="${encoding.code}" docencoding="${encoding.javadoc}">
+            <classpath refid="class.path">
+            </classpath>
+            <packageset dir="${src.java}" defaultexcludes="yes">
+                <include name="**" />
+            </packageset>
+            <packageset dir="${src.test}" defaultexcludes="yes">
+                <include name="**" />
+            </packageset>
+        </javadoc>
+    </target>
+
+    <target name="test" depends="jar, instrument">
+        <delete dir="${report.tests}" />
+        <mkdir dir="${report.tests}" />
+        <junit fork="yes" printsummary="yes" haltonfailure="yes" failureProperty="test.failed">
+            <classpath location="${instrumented.dir}" />
+            <classpath location="${build.dir}" />
+            <classpath refid="class.path" />
+            <sysproperty key="net.sourceforge.cobertura.datafile" file="${cobertura.datafile}" />
+            <batchtest todir="${report.tests}">
+                <formatter type="xml" />
+                <fileset dir="${src.test}">
+                    <include name="**/*Test.java" />
+                    <exclude name="**/AllTests.java" />
+                	<exclude name="**/*TestHelper.class" />
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="junit-report" depends="test">
+        <delete dir="${report.tests.html}" />
+        <mkdir dir="${report.tests.html}" />
+        <junitreport todir="${report.tests}">
+            <fileset dir="${report.tests}">
+                <include name="TEST-*.xml" />
+            </fileset>
+            <report todir="${report.tests.html}" />
+        </junitreport>
+    </target>
+
+    <target name="instrument" depends="compile, compile-test">
+        <cobertura-instrument todir="${instrumented.dir}" datafile="${cobertura.datafile}">
+            <fileset dir="${build.dir}">
+                <exclude name="**/*Test.class" />
+            	<exclude name="**/*TestHelper.class" />
+            </fileset>
+        </cobertura-instrument>
+    </target>
+
+    <target name="coveragereport" depends="test">
+        <cobertura-report format="html" destdir="${log.coveragereport}" srcdir="${srcdir}" datafile="${cobertura.datafile}">
+            <fileset dir="${src.java}">
+                <include name="**/*.java" />
+            </fileset>
+            <fileset dir="${src.test}">
+                <include name="**/*.java" />
+            </fileset>
+        </cobertura-report>
+    </target>
+
+    <target name="all" depends="clean,jar,javadoc,test,junit-report,coveragereport" />
+</project>
