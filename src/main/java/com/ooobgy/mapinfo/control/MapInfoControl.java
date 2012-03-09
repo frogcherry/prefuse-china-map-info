@@ -87,11 +87,12 @@ public class MapInfoControl extends ControlAdapter {
                 }
                 // TODO: print the info.
             }
+            infoBoard.cancelFade();
         } else {
             glassPan.setImage(null);
             glassPan.repaint();
             preTouchedProvId = -1;
-            infoBoard.showProvince(province);
+            infoBoard.fadeOut();
         }
         
         

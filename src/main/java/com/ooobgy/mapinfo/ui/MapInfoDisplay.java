@@ -2,10 +2,14 @@ package com.ooobgy.mapinfo.ui;
 
 import java.awt.AWTException;
 import java.awt.Dimension;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+
+import javax.imageio.ImageIO;
 
 import com.ooobgy.mapinfo.color.ColorType;
 import com.ooobgy.mapinfo.conf.Config;
@@ -65,6 +69,13 @@ public class MapInfoDisplay extends Display {
         this.add(infoBoard);
         infoBoard.setLocation(0, 470);
         infoBoard.setVisible(false);
+        try {
+            infoBoard.setBackImage(ImageIO.read(new File("images/info_board.png")));
+        } catch (IOException e) {
+            infoBoard.setBackImage(null);
+            System.err.println("Error config: info board back image file path.");
+            e.printStackTrace();
+        }
         //System.out.println(provincesMap);
 //        System.out.println(glassPan.getSize());
         bindEventListener();
