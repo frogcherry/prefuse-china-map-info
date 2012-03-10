@@ -61,7 +61,6 @@ public class MapInfoControl extends ControlAdapter {
         if (rebounder != null) {
             rebounder.cancel(true);
         }
-        // SwingUtilities.convertPointToScreen(prePt, e.getComponent());
     }
 
     @Override
@@ -73,7 +72,6 @@ public class MapInfoControl extends ControlAdapter {
         Province province = matchProvince(normColor, touchPt);
         if (province != null) {
             if (preTouchedProvId != province.getId()) {
-                // System.out.println(province.getName());
                 preTouchedProvId = province.getId();
                 String imgFile = Config.get(ConfConsts.IMG_FOLDER)
                         + province.getImage();
@@ -87,7 +85,6 @@ public class MapInfoControl extends ControlAdapter {
                     throw new IllDataException("error data: \"" + imgFile
                             + "\" does not exist. ", e1);
                 }
-                // TODO: print the info.
             }
             infoBoard.cancelFade();
         } else {
@@ -124,24 +121,23 @@ public class MapInfoControl extends ControlAdapter {
         if (SwingUtilities.isLeftMouseButton(e)) {
             Component c = e.getComponent();
             Point pt = (Point) e.getLocationOnScreen().clone();
-            // SwingUtilities.convertPointToScreen(pt, c);
             int dx = pt.x - prePt.x;
             int dy = pt.y - prePt.y;
-            // System.out.println(dx);
-            // System.out.println(dx + "#" + dy);
-            // Point dispLoc = MapInfoDisplay.this.getLocat ion();
             c.setLocation(originLoc.x + dx, originLoc.y + dy);
-            // c.repaint();
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // RebounderOld rebounder = new RebounderOld(e.getComponent(), new
-        // Point(0, 0));
-        // rebounder.run();
         rebounder = new Slider(e.getComponent(), new Point(0, 0));
         rebounder.execute();
     }
 
+    @Override
+    public void mouseExited(MouseEvent e) {
+        glassPan.setImage(null);
+        glassPan.repaint();
+        preTouchedProvId = -1;
+        infoBoard.fadeOut();
+    }
 }

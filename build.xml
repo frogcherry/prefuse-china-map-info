@@ -4,6 +4,7 @@
         forgcherry's practise for studying prefuse and swing
     </description>
     <property name="project.name" value="prefuse-china-map-info" />
+	<property name="project.version" value="0.0.1" />
     <property name="srcdir" value="src" />
     <property name="src.java" value="src/main/java" />
     <property name="src.test" value="src/test/java" />
@@ -18,7 +19,7 @@
     <property name="log.coveragereport" value="${testlogdir}/coveragereport" />
     <property name="cobertura.datafile" value="${testlogdir}/cobertura.ser" />
     <property name="dist" value="dist" />
-    <property name="dist.jar" value="${dist}/jarons_utility.jar" />
+    <property name="dist.jar" value="${dist}/${project.name}-${project.version}.jar" />
     <property name="encoding.code" value="UTF-8" />
     <property name="encoding.javadoc" value="GBK" />
 
@@ -35,18 +36,16 @@
     </taskdef>
 
     <target name="compile" depends="init">
-        <javac srcdir="${src.java}" destdir="${build.dir}" source="1.6" target="1.6" nowarn="yes" debug="yes" includeantruntime="yes">
+        <javac encoding="${encoding.code}" srcdir="${src.java}" destdir="${build.dir}" source="1.6" target="1.6" nowarn="yes" debug="yes" includeantruntime="yes">
             <classpath refid="class.path">
             </classpath>
-            <compilerarg line="-encoding ${encoding.code}" />
         </javac>
     </target>
 
     <target name="compile-test" depends="compile">
-        <javac srcdir="${src.test}" destdir="${build.dir}" source="1.6" target="1.6" nowarn="yes" debug="yes" includeantruntime="yes">
+        <javac encoding="${encoding.code}" srcdir="${src.test}" destdir="${build.dir}" source="1.6" target="1.6" nowarn="yes" debug="yes" includeantruntime="yes">
             <classpath refid="class.path">
             </classpath>
-            <compilerarg line="-encoding ${encoding.code}" />
         </javac>
     </target>
 

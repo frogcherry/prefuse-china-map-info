@@ -14,7 +14,7 @@ import java.lang.reflect.InvocationTargetException;
  * @version 1.0.0
  * @since 1.0.0
  */
-class ExceptionHelper {
+public class ExceptionHelper {
     /**
      * Empty private constructor.
      * 

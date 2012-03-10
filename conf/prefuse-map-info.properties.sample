@@ -1,0 +1,38 @@
+mapinfo.frame.title = China Map Info Demo    Powered by Prefuse  #窗口标题
+
+mapinfo.frame.size.width = 800   #窗口宽度，int类型
+mapinfo.frame.size.height = 600  #窗口高度，int类型
+
+mapinfo.datafile = data/china_map_data.csv #地图数据文件
+mapinfo.bkimgfile = images/map_bk.png  #地图图片
+
+##地图文件各列配置，省份（行政区划）
+mapinfo.data.id = id  #省份id  int
+mapinfo.data.name = name #省份名称
+mapinfo.data.colorId = colorId  #省份颜色  int in [1,2,3,4,5]
+mapinfo.data.area = area  #面积 float
+mapinfo.data.population = population #人口 int
+mapinfo.data.populationRate = populationRate #占全国人口比例 float
+mapinfo.data.minX = x1 #位置-left  int
+mapinfo.data.minY = y1 #位置-top  int
+mapinfo.data.maxX = x2 #位置-right  int
+mapinfo.data.maxY = y2 #位置-bottom int
+mapinfo.data.image = image #省份小图片
+
+mapinfo.image.folder = images/relative/ #省份小图片资源目录
+
+##省份信息板配置
+mapinfo.infoboard.width = 200  #省份信息板宽度  int
+mapinfo.infoboard.height = 100  #省份信息板高度  int
+mapinfo.infoboard.left = 0  #位置-left  int
+mapinfo.infoboard.top = 470   #位置-top  int
+mapinfo.infoboard.area.title = \u9762\u79EF(\u4E07\u5E73\u65B9\u5343\u7C73):  #面积项标题
+mapinfo.infoboard.population.title = \u4EBA\u53E3:  #人口项标题
+mapinfo.infoboard.populationRate.title = \u5360\u5168\u56FD\u4EBA\u53E3\u6BD4\u4F8B(%):  #人口比例项标题
+mapinfo.infoboard.backimg = images/info_board.png  #信息板背景图
+
+##动画效果配置
+mapinfo.animation.slide.frames = 10  #滑动动画帧数  int
+mapinfo.animation.slide.time = 200   #滑动动画时间 单位:ms  int
+mapinfo.animation.fade.frames = 20   #透明隐藏动画帧数  int
+mapinfo.animation.fade.time = 800    #透明隐藏动画时间 单位:ms  int
