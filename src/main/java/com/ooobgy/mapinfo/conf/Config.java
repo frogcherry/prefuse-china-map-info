@@ -11,7 +11,9 @@ import com.ooobgy.mapinfo.consts.ConfConsts;
 import com.ooobgy.mapinfo.exception.IllConfException;
 
 /**
- * 全局配置项 <b>created:</b> 2012-3-5
+ * 全局配置项 <br>
+ * 读取配置文件<br>
+ * <b>created:</b> 2012-3-5
  * 
  * @author 周晓龙 frogcherry@gmail.com
  */
@@ -35,12 +37,12 @@ public class Config {
         }
     }
 
-    public static String get(String Field){
+    public static String get(String Field) {
         loadConf();
         return PropertiesUtility.getStringProperty(properties, Field, true, IllConfException.class);
     }
     
-    public static int getInt(String Field){
+    public static int getInt(String Field) {
         loadConf();
         return PropertiesUtility.getIntegerProperty(properties, Field, true, IllConfException.class);
     }

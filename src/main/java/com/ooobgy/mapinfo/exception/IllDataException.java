@@ -1,7 +1,7 @@
 package com.ooobgy.mapinfo.exception;
 
 /**
- * 表示源数据的异常
+ * 表示源数据的异常<br>
  * <b>created:</b> 2012-3-5
  * @author 周晓龙  frogcherry@gmail.com
  */

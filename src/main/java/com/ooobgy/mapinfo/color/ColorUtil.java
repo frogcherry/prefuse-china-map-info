@@ -10,7 +10,7 @@ import com.ooobgy.comm.util.ValidationUtility;
  * @author 周晓龙  frogcherry@gmail.com
  */
 public class ColorUtil {
-    private static final int RANGE = 15;
+    private static final int RANGE = 15;//RGB各要素+/- 15都可以接受
     
     /**
      * 返回匹配的颜色类型，若匹配失败返回null

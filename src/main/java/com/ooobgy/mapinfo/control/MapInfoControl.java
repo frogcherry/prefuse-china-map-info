@@ -26,10 +26,12 @@ import com.ooobgy.mapinfo.exception.IllDataException;
 import com.ooobgy.mapinfo.pojo.Province;
 import com.ooobgy.mapinfo.ui.ImagePanel;
 import com.ooobgy.mapinfo.ui.InfoBoard;
+import com.ooobgy.mapinfo.ui.MapInfoDisplay;
 
 /**
- * 操作控制器 <b>created:</b> 2012-3-8
- * 
+ * 操作控制器 <br>
+ * <b>created:</b> 2012-3-8
+ * @see MapInfoDisplay
  * @author 周晓龙 frogcherry@gmail.com
  */
 public class MapInfoControl extends ControlAdapter {

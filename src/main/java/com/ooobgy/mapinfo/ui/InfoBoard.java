@@ -24,7 +24,8 @@ import com.ooobgy.mapinfo.control.InfoBoardFader;
 import com.ooobgy.mapinfo.pojo.Province;
 
 /**
- * 绘制省份详细信息的Jpanel <b>created:</b> 2012-3-8
+ * 绘制省份详细信息的Jpanel <br>
+ * <b>created:</b> 2012-3-8
  * 
  * @author 周晓龙 frogcherry@gmail.com
  */
@@ -84,8 +85,7 @@ public class InfoBoard extends JPanel {
     }
 
     private void init() {
-        setSize(200, 100);
-        // setLocation(0, 600 - 280);//test
+        setSize(Config.getInt(ConfConsts.INFOBOARD_WIDTH), Config.getInt(ConfConsts.INFOBOARD_HEIGHT));
         setOpaque(false);
         composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f);
 
@@ -104,15 +104,15 @@ public class InfoBoard extends JPanel {
         infoPanel.add(dataPenel, BorderLayout.EAST);
 
         titlePenel.add(areaTitle);
-        areaTitle.setText("面积(万平方千米):");
+        areaTitle.setText(Config.get(ConfConsts.INFOBOARD_AREA_TITLE));
         dataPenel.add(area);
         area.setText("");
         titlePenel.add(populationTitle);
-        populationTitle.setText("人口:");
+        populationTitle.setText(Config.get(ConfConsts.INFOBOARD_POP_TITLE));
         dataPenel.add(population);
         population.setText("           ");
         titlePenel.add(populationRateTitle);
-        populationRateTitle.setText("占全国人口比例(%):");
+        populationRateTitle.setText(Config.get(ConfConsts.INFOBOARD_POPRATE_TITLE));
         dataPenel.add(populationRate);
         populationRate.setText("");
 

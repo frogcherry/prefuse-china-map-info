@@ -7,9 +7,9 @@ import javax.swing.SwingWorker;
 import com.ooobgy.mapinfo.ui.InfoBoard;
 
 /**
- * 
+ * 省份信息板的透明隐藏动画效果<br>
  * <b>created:</b> 2012-3-9
- * 
+ * @see InfoBoard
  * @author 周晓龙 frogcherry@gmail.com
  */
 public class InfoBoardFader extends SwingWorker<Float, Float> {

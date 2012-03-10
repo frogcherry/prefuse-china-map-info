@@ -1,5 +1,10 @@
 package com.ooobgy.mapinfo.consts;
 
+/**
+ * 配置文件的配置项内容<br>
+ * <b>created:</b> 2012-3-10
+ * @author 周晓龙  frogcherry@gmail.com
+ */
 public class ConfConsts {
     public static final String CONF_FILE = "conf/prefuse-map-info.properties";
 
@@ -24,4 +29,14 @@ public class ConfConsts {
     public static final String DATA_IMAGE = "mapinfo.data.image";
 
     public static final String IMG_FOLDER = "mapinfo.image.folder";
+    
+    public static final String INFOBOARD_WIDTH = "mapinfo.infoboard.width";
+    public static final String INFOBOARD_HEIGHT = "mapinfo.infoboard.height";
+    public static final String INFOBOARD_LEFT = "mapinfo.infoboard.left";
+    public static final String INFOBOARD_TOP = "mapinfo.infoboard.top";
+    public static final String INFOBOARD_BKIMG = "mapinfo.infoboard.backimg";
+    public static final String INFOBOARD_AREA_TITLE = "mapinfo.infoboard.area.title";
+    public static final String INFOBOARD_POP_TITLE = "mapinfo.infoboard.population.title";
+    public static final String INFOBOARD_POPRATE_TITLE = "mapinfo.infoboard.populationRate.title";
+    
 }

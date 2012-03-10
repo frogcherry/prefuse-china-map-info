@@ -3,7 +3,8 @@ package com.ooobgy.mapinfo.color;
 import java.awt.Color;
 
 /**
- * Five color type in map data file. <b>created:</b> 2012-3-5
+ * Five color type in map data file. <br>
+ * <b>created:</b> 2012-3-5
  * 
  * @author 周晓龙 frogcherry@gmail.com
  */
