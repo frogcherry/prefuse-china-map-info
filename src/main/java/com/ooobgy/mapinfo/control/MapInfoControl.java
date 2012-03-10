@@ -37,7 +37,7 @@ import com.ooobgy.mapinfo.ui.MapInfoDisplay;
 public class MapInfoControl extends ControlAdapter {
     private Point prePt;
     private Point originLoc;
-    private Rebounder rebounder;
+    private Slider rebounder;
     private Robot robot;
     private Map<ColorType, Set<Province>> provincesMap;
     private int preTouchedProvId;
@@ -140,7 +140,7 @@ public class MapInfoControl extends ControlAdapter {
         // RebounderOld rebounder = new RebounderOld(e.getComponent(), new
         // Point(0, 0));
         // rebounder.run();
-        rebounder = new Rebounder(e.getComponent(), new Point(0, 0));
+        rebounder = new Slider(e.getComponent(), new Point(0, 0));
         rebounder.execute();
     }
 

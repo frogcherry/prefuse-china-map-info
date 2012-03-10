@@ -39,4 +39,9 @@ public class ConfConsts {
     public static final String INFOBOARD_POP_TITLE = "mapinfo.infoboard.population.title";
     public static final String INFOBOARD_POPRATE_TITLE = "mapinfo.infoboard.populationRate.title";
     
+    public static final String SLIDE_FRAMES = "mapinfo.animation.slide.frames";
+    public static final String SLIDE_TIME = "mapinfo.animation.slide.time";
+    public static final String FADE_FRAMES = "mapinfo.animation.fade.frames";
+    public static final String FADE_TIME = "mapinfo.animation.fade.time";
+    
 }

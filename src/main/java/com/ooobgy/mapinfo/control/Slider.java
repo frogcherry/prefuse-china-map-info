@@ -6,18 +6,21 @@ import java.util.List;
 
 import javax.swing.SwingWorker;
 
+import com.ooobgy.mapinfo.conf.Config;
+import com.ooobgy.mapinfo.consts.ConfConsts;
+
 /**
  * 控制指定组件进行滑动动画
  * <b>created:</b> 2012-3-8
  * @author 周晓龙  frogcherry@gmail.com
  */
-public class Rebounder extends SwingWorker<Point, Point> {
-    private static final int ANIM_TIME = 200;// animation (ms)
-    public static final int ANIM_FRM = 10;// 动画帧数
+public class Slider extends SwingWorker<Point, Point> {
+    private static final int ANIM_TIME = Config.getInt(ConfConsts.SLIDE_TIME);// animation (ms)
+    public static final int ANIM_FRM = Config.getInt(ConfConsts.SLIDE_FRAMES);// 动画帧数
     private Component actor;
     private Point destination;
 
-    public Rebounder(Component c, Point destination) {
+    public Slider(Component c, Point destination) {
         this.actor = c;
         this.destination = destination;
     }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.swing.SwingWorker;
 
+import com.ooobgy.mapinfo.conf.Config;
+import com.ooobgy.mapinfo.consts.ConfConsts;
 import com.ooobgy.mapinfo.ui.InfoBoard;
 
 /**
@@ -14,8 +16,8 @@ import com.ooobgy.mapinfo.ui.InfoBoard;
  */
 public class InfoBoardFader extends SwingWorker<Float, Float> {
     private InfoBoard infoBoard;
-    private static final int ANIM_TIME = 800;// animation (ms)
-    public static final int ANIM_FRM = 20;// 动画帧数
+    private static final int ANIM_TIME = Config.getInt(ConfConsts.FADE_TIME);// animation (ms)
+    public static final int ANIM_FRM = Config.getInt(ConfConsts.FADE_FRAMES);// 动画帧数
 
     public InfoBoardFader(InfoBoard infoBoard) {
         super();
